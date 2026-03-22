@@ -36,6 +36,10 @@ public class PriceMarketService {
         });
     }
 
+    public void delete(UUID id){
+        priceMarketRepository.deleteById(id);
+    }
+
     public Optional<PriceMarket> findById(UUID id){
         return priceMarketRepository.findById(id);
     }
