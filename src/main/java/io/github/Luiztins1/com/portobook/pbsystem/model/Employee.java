@@ -1,12 +1,19 @@
 package io.github.Luiztins1.com.portobook.pbsystem.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "employee")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee implements Serializable {
 
     @Id
