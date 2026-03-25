@@ -31,7 +31,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public Optional<Book> update(@PathVariable UUID id, @RequestBody Book details){
+    public Optional<Book> update(@PathVariable("id") UUID id, @RequestBody Book details){
         return bookService.updateBook(id, details);
     }
 
