@@ -30,7 +30,7 @@ public class PriceMarketController {
         return priceMarketService.findAll();
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public Optional<PriceMarket> update(@PathVariable("id") UUID id, @RequestBody PriceMarket details){
         return priceMarketService.updatePriceMarket(id, details);
     }

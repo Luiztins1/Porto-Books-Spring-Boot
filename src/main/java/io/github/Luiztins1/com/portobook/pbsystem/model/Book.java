@@ -37,7 +37,7 @@ public class Book implements Serializable {
     @Column(name = "price", precision = 18, scale = 2, nullable = false)
     private BigDecimal price;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_price_market", referencedColumnName = "id_price_market")
     private PriceMarket priceMarket;
 
