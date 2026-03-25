@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,9 +27,6 @@ public class Book implements Serializable {
     @Column(name = "name", length = 45, nullable = false)
     private String name;
 
-    @Column(name = "author", length = 45, nullable = false)
-    private String author;
-
     @Column(name = "country", length = 45, nullable = false)
     private String country;
 
@@ -36,6 +35,10 @@ public class Book implements Serializable {
 
     @Column(name = "price", precision = 18, scale = 2, nullable = false)
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "book")
+    @JoinColumn(name = "id_author", referencedColumnName = "id_author")
+    private List<Author> author;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_price_market", referencedColumnName = "id_price_market")
