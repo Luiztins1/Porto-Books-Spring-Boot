@@ -3,6 +3,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.controller;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Author;
 import io.github.Luiztins1.com.portobook.pbsystem.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class AuthorController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id){
         authorService.deleteAuthor(id);
+
     }
 
     @GetMapping("/{id}")

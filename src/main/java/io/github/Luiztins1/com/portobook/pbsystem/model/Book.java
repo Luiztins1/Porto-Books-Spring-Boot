@@ -37,7 +37,6 @@ public class Book implements Serializable {
     private BigDecimal price;
 
     @OneToMany(mappedBy = "book")
-    @JoinColumn(name = "id_author", referencedColumnName = "id_author")
     private List<Author> author;
 
     @OneToOne(fetch = FetchType.LAZY)
