@@ -3,9 +3,13 @@ package io.github.Luiztins1.com.portobook.pbsystem.controller;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Manager;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.ManagerRepository;
 import io.github.Luiztins1.com.portobook.pbsystem.service.ManagerService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,27 +26,55 @@ public class ManagerController {
     }
 
     @PostMapping
-    public Manager save(@RequestBody Manager manager){
-        return managerService.saveManager(manager);
+    public ResponseEntity<Manager> save(@RequestBody Manager manager) {
+        Manager managerEntidade = manager;
+        managerService.saveManager(managerEntidade);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(managerEntidade.getId_manager())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     @GetMapping
-    public List<Manager> findAll(){
-        return managerService.findAll();
+    public ResponseEntity<List<Manager>> findAll() {
+        List<Manager> managerList = managerService.findAll();
+
+        if(managerList.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public Optional<Manager> update(@PathVariable("id") UUID id, @RequestBody Manager details){
-        return managerService.updateManager(id, details);
+    public ResponseEntity<Manager> update(@PathVariable("id") UUID id, @RequestBody Manager details){
+        Optional<Manager> managerUpdate = managerService.updateManager(id, details);
+
+        if(managerUpdate.isPresent()){
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") UUID id){
+    public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         managerService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
-    public Optional<Manager> findById(@PathVariable("id") UUID id){
-        return managerService.findById(id);
+    public ResponseEntity<Manager> findById(@PathVariable("id") UUID id){
+        Optional<Manager> managerId = managerService.findById(id);
+
+        if(managerId.isPresent()) {
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }

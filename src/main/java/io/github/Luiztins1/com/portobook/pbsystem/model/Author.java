@@ -31,5 +31,4 @@ public class Author implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Book book;
-
 }

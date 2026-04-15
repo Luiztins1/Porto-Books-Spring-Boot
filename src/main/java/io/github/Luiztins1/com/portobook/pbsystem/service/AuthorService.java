@@ -1,5 +1,6 @@
 package io.github.Luiztins1.com.portobook.pbsystem.service;
 
+import io.github.Luiztins1.com.portobook.pbsystem.controller.dto.AuthorDTO;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Author;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
