@@ -3,6 +3,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.controller;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Manager;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.ManagerRepository;
 import io.github.Luiztins1.com.portobook.pbsystem.service.ManagerService;
+import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +17,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/manager")
+@RequiredArgsConstructor
 public class ManagerController {
 
     private final ManagerService managerService;
-
-    @Autowired
-    public ManagerController(ManagerService managerService) {
-        this.managerService = managerService;
-    }
 
     @PostMapping
     public ResponseEntity<Manager> save(@RequestBody Manager manager) {

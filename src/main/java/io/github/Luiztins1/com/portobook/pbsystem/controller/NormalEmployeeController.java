@@ -2,6 +2,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.controller;
 
 import io.github.Luiztins1.com.portobook.pbsystem.model.NormalEmployee;
 import io.github.Luiztins1.com.portobook.pbsystem.service.NormalEmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/normal_employee")
+@RequiredArgsConstructor
 public class NormalEmployeeController {
 
     private final NormalEmployeeService normalEmployeeService;
-
-    @Autowired
-    public NormalEmployeeController(NormalEmployeeService normalEmployeeService) {
-        this.normalEmployeeService = normalEmployeeService;
-    }
 
     @PostMapping
     public ResponseEntity<NormalEmployee> save(@RequestBody NormalEmployee normalEmployee){

@@ -4,6 +4,7 @@ import io.github.Luiztins1.com.portobook.pbsystem.controller.dto.AuthorDTO;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Author;
 import io.github.Luiztins1.com.portobook.pbsystem.service.AuthorService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/author")
+@RequiredArgsConstructor
 public class AuthorController {
 
     private final AuthorService authorService;
-
-    @Autowired
-    public AuthorController(AuthorService authorService) {
-        this.authorService = authorService;
-    }
 
     @PostMapping
     public ResponseEntity<AuthorDTO> save(@RequestBody @Valid AuthorDTO author){

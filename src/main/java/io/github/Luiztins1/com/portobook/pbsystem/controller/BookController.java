@@ -4,6 +4,7 @@ import io.github.Luiztins1.com.portobook.pbsystem.controller.dto.BookDTO;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Book;
 import io.github.Luiztins1.com.portobook.pbsystem.service.BookService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/book")
+@RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;
-
-    @Autowired
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     @PostMapping
     public ResponseEntity<Book> saveBook(@RequestBody @Valid BookDTO book){

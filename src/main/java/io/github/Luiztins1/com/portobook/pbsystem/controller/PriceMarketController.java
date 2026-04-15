@@ -2,6 +2,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.controller;
 
 import io.github.Luiztins1.com.portobook.pbsystem.model.PriceMarket;
 import io.github.Luiztins1.com.portobook.pbsystem.service.PriceMarketService;
+import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/price_market")
+@RequiredArgsConstructor
 public class PriceMarketController {
 
     private final PriceMarketService priceMarketService;
-
-    @Autowired
-    public PriceMarketController(PriceMarketService priceMarketService) {
-        this.priceMarketService = priceMarketService;
-    }
 
     @PostMapping
     public ResponseEntity<PriceMarket> save(@RequestBody PriceMarket priceMarket){
