@@ -3,6 +3,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.service;
 import io.github.Luiztins1.com.portobook.pbsystem.model.NormalEmployee;
 import io.github.Luiztins1.com.portobook.pbsystem.model.PriceMarket;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.PriceMarketRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +12,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class PriceMarketService {
 
     private final PriceMarketRepository priceMarketRepository;
-
-    @Autowired
-    public PriceMarketService(PriceMarketRepository priceMarketRepository) {
-        this.priceMarketRepository = priceMarketRepository;
-    }
 
     public PriceMarket savePriceMarket(PriceMarket priceMarket){
         return priceMarketRepository.save(priceMarket);

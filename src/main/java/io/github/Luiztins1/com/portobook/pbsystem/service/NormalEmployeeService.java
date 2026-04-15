@@ -4,6 +4,7 @@ import io.github.Luiztins1.com.portobook.pbsystem.model.Manager;
 import io.github.Luiztins1.com.portobook.pbsystem.model.NormalEmployee;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.ManagerRepository;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.NormalEmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class NormalEmployeeService {
-    private final NormalEmployeeRepository normalEmployeeRepository;
 
-    @Autowired
-    public NormalEmployeeService(NormalEmployeeRepository normalEmployee) {
-        this.normalEmployeeRepository = normalEmployee;
-    }
+    private final NormalEmployeeRepository normalEmployeeRepository;
 
     public NormalEmployee saveNormalEmployee(NormalEmployee normalEmployee){
         return normalEmployeeRepository.save(normalEmployee);

@@ -3,6 +3,8 @@ package io.github.Luiztins1.com.portobook.pbsystem.service;
 import io.github.Luiztins1.com.portobook.pbsystem.controller.dto.AuthorDTO;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Author;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.AuthorRepository;
+import io.github.Luiztins1.com.portobook.pbsystem.validator.AuthorValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +13,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorService {
 
     private final AuthorRepository authorRepository;
-
-    @Autowired
-    public AuthorService(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
+    private final AuthorValidator authorValidator;
 
     public Author saveAuthor(Author author){
         return authorRepository.save(author);

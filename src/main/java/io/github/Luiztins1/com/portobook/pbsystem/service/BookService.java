@@ -2,6 +2,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.service;
 
 import io.github.Luiztins1.com.portobook.pbsystem.model.Book;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +12,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
-
-    @Autowired
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
 
     public Book saveBook(Book book){
         return bookRepository.save(book);

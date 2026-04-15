@@ -2,6 +2,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.service;
 
 import io.github.Luiztins1.com.portobook.pbsystem.model.Manager;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.ManagerRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +12,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ManagerService {
 
     private final ManagerRepository managerRepository;
-
-    @Autowired
-    public ManagerService(ManagerRepository managerRepository) {
-        this.managerRepository = managerRepository;
-    }
 
     public Manager saveManager(Manager manager){
         return managerRepository.save(manager);

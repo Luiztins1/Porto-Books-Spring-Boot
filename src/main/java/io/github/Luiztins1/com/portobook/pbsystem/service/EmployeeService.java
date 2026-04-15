@@ -2,6 +2,7 @@ package io.github.Luiztins1.com.portobook.pbsystem.service;
 
 import io.github.Luiztins1.com.portobook.pbsystem.model.Employee;
 import io.github.Luiztins1.com.portobook.pbsystem.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,10 @@ import java.util.UUID;
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 
     public Employee saveEmployee(Employee employee){
         return employeeRepository.save(employee);
