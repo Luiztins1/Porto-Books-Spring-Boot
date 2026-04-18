@@ -20,6 +20,7 @@ public class AuthorService {
     private final AuthorValidator authorValidator;
 
     public Author saveAuthor(Author author){
+        authorValidator.validate(author);
         return authorRepository.save(author);
     }
 
@@ -32,6 +33,7 @@ public class AuthorService {
             existAuthor.setName(details.getName());
             existAuthor.setAge(details.getAge());
             existAuthor.setNationality(details.getNationality());
+            authorValidator.validate(existAuthor);
             return authorRepository.save(existAuthor);
         });
     }

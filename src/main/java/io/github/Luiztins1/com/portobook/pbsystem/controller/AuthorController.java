@@ -1,6 +1,8 @@
 package io.github.Luiztins1.com.portobook.pbsystem.controller;
 
 import io.github.Luiztins1.com.portobook.pbsystem.controller.dto.AuthorDTO;
+import io.github.Luiztins1.com.portobook.pbsystem.controller.dto.ResponseError;
+import io.github.Luiztins1.com.portobook.pbsystem.exceptions.DuplicateRegisterException;
 import io.github.Luiztins1.com.portobook.pbsystem.model.Author;
 import io.github.Luiztins1.com.portobook.pbsystem.service.AuthorService;
 import jakarta.validation.Valid;
@@ -24,17 +26,23 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @PostMapping
-    public ResponseEntity<AuthorDTO> save(@RequestBody @Valid AuthorDTO author){
-        Author autorEntidade = author.mappedAuthor();
-        authorService.saveAuthor(autorEntidade);
+    public ResponseEntity<Object> save(@RequestBody @Valid AuthorDTO author) {
+        try {
+            Author autorEntidade = author.mappedAuthor();
+            authorService.saveAuthor(autorEntidade);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(autorEntidade.getId_author())
-                .toUri();
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(autorEntidade.getId_author())
+                    .toUri();
 
-        return ResponseEntity.created(location).build();
+            return ResponseEntity.created(location).build();
+
+        }catch (DuplicateRegisterException e) {
+            var erroDTO = ResponseError.conflict(e.getMessage());
+            return ResponseEntity.status(erroDTO.status()).body(erroDTO);
+        }
 
     }
 
@@ -50,13 +58,19 @@ public class AuthorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Author> update(@PathVariable("id") UUID id, @RequestBody Author details){
-        Optional<Author> atualizado = authorService.updateAuthor(id, details);
+        try {
+            Optional<Author> atualizado = authorService.updateAuthor(id, details);
 
-        if(atualizado.isPresent()){
-            return ResponseEntity.ok(atualizado.get());
+            if(atualizado.isPresent()){
+                return ResponseEntity.ok(atualizado.get());
+            }
+
+            return ResponseEntity.notFound().build();
+        }catch(DuplicateRegisterException e){
+            var erroDTO = ResponseError.conflict(e.getMessage());
+            return ResponseEntity.status(erroDTO.status()).body(erroDTO);
         }
 
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
